@@ -67,7 +67,26 @@ struct HelloView: View {
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 5).fill(expandBgColor))
                         .padding()
-                Spacer()
+                    Spacer()
+                    ScrollView{
+                        LazyVGrid(
+                            columns: [ GridItem(.fixed(70), spacing: 1), GridItem(.fixed(70), spacing: 1),  GridItem(.fixed(70), spacing: 1) ],
+                            alignment: .center,
+                            spacing: 0
+                        ) {
+                            ForEach(0..<120) { idx in
+                                Text("\(idx).")
+                                    .foregroundColor((idx % 2 == 0) ? Color.blue : .white)
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .fill((idx % 2 == 0) ? Color.white : .blue)
+                                            .frame(width: 60, height: 40)
+                                    .padding()
+                                    )
+                            }
+                        }
+                    }
                 }
             }
                 .padding()
