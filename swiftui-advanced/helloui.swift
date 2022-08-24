@@ -16,7 +16,21 @@ struct HelloView: View {
                 .background(Capsule().fill(Color.blue))
                 .padding()
             HStack {
+                Spacer()
                 TextField("Your name", text: $name)
+                Spacer()
+                Path { path in
+                    path.move(to: CGPoint(x: 10, y: 10))
+                    path.addLine(to: CGPoint(x: 40, y: 10))
+                    path.addLine(to: CGPoint(x: 50, y: 25))
+                    path.addLine(to: CGPoint(x: 40, y: 40))
+                    path.addLine(to: CGPoint(x: 10, y: 40))
+                    path.addLine(to: CGPoint(x: 20, y: 25))
+                }
+                    .fill(Color.blue)
+                    .frame(width: 100, height: 100)
+                    .background(Color.gray)
+                Spacer()
             }
             HStack {
                 HStack {
