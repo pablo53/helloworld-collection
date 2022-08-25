@@ -2,6 +2,19 @@ import SwiftUI
 
 // Inspired by https://gist.github.com/chriseidhof/26768f0b63fa3cdf8b46821e099df5ff
 
+struct RightArrow: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX - rect.width * 0.25, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        path.addLine(to: CGPoint(x: rect.maxX - rect.width * 0.25, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.minX + rect.width * 0.25, y: rect.midY))
+        return path
+    }
+}
+
 struct HelloView: View {
     @State private var name: String = "World"
     @State private var bt1: Bool = true
@@ -19,19 +32,42 @@ struct HelloView: View {
                 Spacer()
                 TextField("Your name", text: $name)
                 Spacer()
-                Path { path in
-                    path.move(to: CGPoint(x: 10, y: 10))
-                    path.addLine(to: CGPoint(x: 40, y: 10))
-                    path.addLine(to: CGPoint(x: 50, y: 25))
-                    path.addLine(to: CGPoint(x: 40, y: 40))
-                    path.addLine(to: CGPoint(x: 10, y: 40))
-                    path.addLine(to: CGPoint(x: 20, y: 25))
+                GeometryReader { geometry in
+                    Path { path in
+                        path.move(to: CGPoint(x: 10, y: 10))
+                        path.addLine(to: CGPoint(x: 40, y: 10))
+                        path.addLine(to: CGPoint(x: 50, y: 25))
+                        path.addLine(to: CGPoint(x: 40, y: 40))
+                        path.addLine(to: CGPoint(x: 10, y: 40))
+                        path.addLine(to: CGPoint(x: 20, y: 25))
+                    }
+                        .fill(Color.blue)
+                        .frame(width: geometry.size.width * 0.75, height: geometry.size.height * 0.95)
+                        .background(Color.gray)
+                    RightArrow()
+                        .fill(Color.red)
+                        .offset(x: 60, y: 10)
+                        .frame(width: 40, height: 30)
+                    RightArrow()
+                        .fill(Color.green)
+                        .offset(x: 100, y: 10)
+                        .frame(width: 40, height: 30)
+                    RightArrow()
+                        .fill(Color.yellow)
+                        .offset(x: 80, y: 30)
+                        .frame(width: 40, height: 30)
+                    RightArrow()
+                        .fill(Color.purple)
+                        .offset(x: 40, y: 30)
+                        .frame(width: 40, height: 30)
+                    RightArrow()
+                        .fill(Color.white.opacity(0.6))
+                        .offset(x: 20, y: 20)
+                        .frame(width: 120, height: 30)
                 }
-                    .fill(Color.blue)
-                    .frame(width: 100, height: 100)
-                    .background(Color.gray)
                 Spacer()
             }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 100, alignment: .topLeading)
             HStack {
                 HStack {
                     VStack {
