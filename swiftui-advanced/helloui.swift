@@ -22,13 +22,36 @@ struct HelloView: View {
     @State private var bt3: Bool = true
     @State private var expandBallsGroup: Bool = false
     @State private var expandBgColor = Color.black
+    @State private var x: Double = 0.0
+    @State private var y: Double = 0.0
     var body: some View {
         VStack {
-            Text("Hello \(name)!")
-                .padding()
-                .shadow(color: .white, radius: 1, x: 25, y: 25)
-                .background(Capsule().fill(Color.blue))
-                .padding()
+            HStack {
+                Spacer()
+                VStack {
+                    Text("Hello \(name)!")
+                        .padding()
+                        .shadow(color: .white, radius: 1, x: 25, y: 25)
+                        .background(Capsule().fill(Color.blue))
+                        .padding()
+                    Slider(value: $x, in: (-1.0)...(1.0))
+                    Text("X: \(x)")
+                        .background(Rectangle().fill(Color.red))
+                }
+                HStack {
+                    GeometryReader { geometry in
+                        Slider(value: $y, in: (-1.0)...(1.0))
+                            .rotationEffect(.degrees(-90.0), anchor: .topLeading)
+                            .frame(width: geometry.size.height)
+                            .offset(y: geometry.size.height)
+                    }
+                    Text("Y: \(y)")
+                        .background(Rectangle().fill(Color.red))
+                        .offset(x: 0, y: 0)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Spacer()
+                }
+            }
             HStack {
                 Spacer()
                 TextField("Your name", text: $name)
