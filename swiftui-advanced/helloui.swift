@@ -26,11 +26,14 @@ struct HelloView: View {
         VStack {
             Text("Hello \(name)!")
                 .padding()
+                .shadow(color: .white, radius: 1, x: 25, y: 25)
                 .background(Capsule().fill(Color.blue))
                 .padding()
             HStack {
                 Spacer()
                 TextField("Your name", text: $name)
+                    .padding()
+                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.pink, lineWidth: 2))
                 Spacer()
                 GeometryReader { geometry in
                     Path { path in
@@ -48,6 +51,7 @@ struct HelloView: View {
                         .fill(Color.red)
                         .offset(x: 60, y: 10)
                         .frame(width: 40, height: 30)
+                        .shadow(color: .red, radius: 3, x: 5, y: 5)
                     RightArrow()
                         .fill(Color.green)
                         .offset(x: 100, y: 10)
@@ -56,6 +60,7 @@ struct HelloView: View {
                         .fill(Color.yellow)
                         .offset(x: 80, y: 30)
                         .frame(width: 40, height: 30)
+                        .shadow(color: .yellow, radius: 3, x: 5, y: 5)
                     RightArrow()
                         .fill(Color.purple)
                         .offset(x: 40, y: 30)
