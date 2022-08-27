@@ -11,6 +11,7 @@ struct RightArrow: Shape {
         path.addLine(to: CGPoint(x: rect.maxX - rect.width * 0.25, y: rect.maxY))
         path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
         path.addLine(to: CGPoint(x: rect.minX + rect.width * 0.25, y: rect.midY))
+        path.closeSubpath()
         return path
     }
 }
